@@ -30,16 +30,19 @@ class VentaTest {
     @Test
     void testDescontarPrecio() throws Exception {
         double precioObtenido = venta.descontarPrecio(500);
-        assertEquals(1000, precioObtenido);
+        double precioEsperado = 1000.0;
+        assertEquals(precioEsperado, precioObtenido);
     }
 
     @Test
     void testLanzarExceptionCuandoElResultadoEsNegativo() throws Exception {
+        assertThrows(Exception.class, () -> venta.descontarPrecio(3000));
     }
 
     @Test
     void testSumarPorcentajePrecio() {
         double precioObtenido = venta.sumarPorcentajePrecio(0.5);
-        assertEquals(2250, precioObtenido);
+        double precioEsperado = 2250.0;
+        assertEquals(precioEsperado, precioObtenido);
     }
 }
