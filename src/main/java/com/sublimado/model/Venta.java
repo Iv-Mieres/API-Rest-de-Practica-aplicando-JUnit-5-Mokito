@@ -26,7 +26,6 @@ public class Venta {
     @JsonIgnoreProperties("ventas")
     private Cliente cliente;
 
-
     public double descontarPrecio(double descuento) throws Exception {
         double resultado = this.precio -= descuento;
         if(resultado < 0) {

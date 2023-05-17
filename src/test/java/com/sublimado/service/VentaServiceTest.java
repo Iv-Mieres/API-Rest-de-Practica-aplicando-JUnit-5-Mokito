@@ -15,8 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class VentaServiceTest {
@@ -28,21 +27,20 @@ class VentaServiceTest {
     private IVentaRepository ventaRepository;
 
     @Test
-    void testGuardarVenta() throws Exception {
+    void verificaQueGuardeLaVentaSiEstaContieneUnCliente() throws Exception {
         Cliente cliente = new Cliente();
         Venta venta = Venta.builder()
                 .precio(1200.0)
                 .fecha(LocalDate.now())
                 .cliente(cliente)
                 .build();
-
         when(ventaRepository.save(venta)).thenReturn(venta);
         ventaService.saveVenta(venta);
         verify(ventaRepository).save(venta);
     }
 
     @Test
-    void verificarQueAlGuardarLaVentaElClienteNoSeaNull(){
+    void verificarQueLanceUnaExceptionSiAlGuardarLaVentaEstaContieneUnClienteNull(){
         Venta venta = new Venta();
         Exception ex = assertThrows(Exception.class, () -> ventaService.saveVenta(venta));
         assertEquals("La venta no puede estar vacia", ex.getMessage());
@@ -88,7 +86,7 @@ class VentaServiceTest {
     }
 
     @Test
-    void verificarQueActualiceLaVentaSiElIdExiste() throws Exception {
+    void verificarQueLaVentaSeActualiceSiElIdExiste() throws Exception {
         Venta ventaActualizada = Venta.builder()
                 .idVenta(1L)
                 .precio(1300.0)
@@ -101,7 +99,7 @@ class VentaServiceTest {
     }
 
     @Test
-    void verificarQueLanceUnaExceptionSiElIdNoExiste() throws Exception {
+    void verificarQueAlActualizarLanceUnaExceptionSiElIdIngresadoNoExiste() throws Exception {
         Venta ventaActualizada = Venta.builder()
                 .idVenta(1L)
                 .precio(1300.0)
@@ -111,5 +109,12 @@ class VentaServiceTest {
         assertThrows(Exception.class, () -> ventaService.updateVenta(ventaActualizada));
     }
 
+    @Test
+    void verificarQueElMetodoBorreLaVenta(){
+        Venta venta = Venta.builder()
+                .idVenta(1L).build();
+        doNothing().when(ventaRepository).deleteById(venta.getIdVenta());
+        ventaService.deleteVenta(1L);
+    }
 
 }
