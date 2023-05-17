@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Objects;
 
+
 @Service
 public class VentaService implements IVentaService {
 
@@ -23,13 +24,13 @@ public class VentaService implements IVentaService {
     }
 
     @Override
-    public Venta getVenta(Long idVenta) throws Exception {
+    public Venta traerVenta(Long idVenta) throws Exception {
         return ventaRepository.findById(idVenta)
                 .orElseThrow(() -> new Exception("El id ingresado no ha sido encontrado"));
     }
 
     @Override
-    public List<Venta> ventas() {
+    public List<Venta> traerVentas() {
         return ventaRepository.findAll();
     }
 

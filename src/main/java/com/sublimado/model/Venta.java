@@ -40,5 +40,4 @@ public class Venta {
         return this.precio += resultado;
     }
 
-
 }
