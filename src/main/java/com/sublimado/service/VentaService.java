@@ -18,7 +18,7 @@ public class VentaService implements IVentaService {
     @Override
     public void saveVenta(Venta venta) throws Exception {
         if(Objects.isNull(venta.getCliente())){
-            throw new Exception("La venta no puede estar vacia");
+            throw new Exception("La venta debe contener un cliente");
         }
         ventaRepository.save(venta);
     }

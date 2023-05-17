@@ -2,6 +2,7 @@ package com.sublimado.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 public class Cliente {
 
@@ -20,7 +22,7 @@ public class Cliente {
     private String nombre;
     private String apellido;
     private String email;
-    private String edad;
+    private String dni;
     @OneToMany(mappedBy = "cliente")
     @JsonIgnoreProperties("cliente")
     private List<Venta> ventas;

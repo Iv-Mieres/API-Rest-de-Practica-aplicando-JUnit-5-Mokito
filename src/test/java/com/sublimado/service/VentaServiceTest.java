@@ -43,7 +43,7 @@ class VentaServiceTest {
     void verificarQueLanceUnaExceptionSiAlGuardarLaVentaEstaContieneUnClienteNull(){
         Venta venta = new Venta();
         Exception ex = assertThrows(Exception.class, () -> ventaService.saveVenta(venta));
-        assertEquals("La venta no puede estar vacia", ex.getMessage());
+        assertEquals("La venta debe contener un cliente", ex.getMessage());
     }
 
     @Test
@@ -82,7 +82,6 @@ class VentaServiceTest {
 
         when(ventaRepository.findAll()).thenReturn(List.of(venta, venta2));
         assertEquals(ventas,  ventaService.traerVentas());
-
     }
 
     @Test
